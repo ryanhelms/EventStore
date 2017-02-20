@@ -46,7 +46,7 @@ namespace EventStore.Core.Tests.Helpers
         public IPEndPoint ExtHttpEndPoint { get; private set; }
         public readonly ClusterVNode Node;
         public readonly TFChunkDb Db;
-        private readonly string _dbPath;
+        public readonly string _dbPath;
 
         public MiniNode(string pathname, 
                         int? tcpPort = null, int? tcpSecPort = null, int? httpPort = null, 
@@ -74,7 +74,7 @@ namespace EventStore.Core.Tests.Helpers
             int intHttpPort = PortsHelper.GetAvailablePort(ip);
 
             _dbPath = Path.Combine(pathname, string.Format("mini-node-db-{0}-{1}-{2}", extTcpPort, extSecTcpPort, extHttpPort));
-    
+
             TcpEndPoint = new IPEndPoint(ip, extTcpPort);
             TcpSecEndPoint = new IPEndPoint(ip, extSecTcpPort);
             IntTcpEndPoint = new IPEndPoint(ip,intTcpPort);
