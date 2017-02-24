@@ -92,7 +92,7 @@ namespace EventStore.ClientAPI
             }
             if (scheme == "discover")
             {
-                var clusterSettings = new ClusterSettings(uri.Host, connectionSettings.MaxDiscoverAttempts, uri.Port, connectionSettings.GossipTimeout);
+                var clusterSettings = new ClusterSettings(uri.Host, connectionSettings.MaxDiscoverAttempts, uri.Port, connectionSettings.GossipTimeout, false);
                 Ensure.NotNull(connectionSettings, "connectionSettings");
                 Ensure.NotNull(clusterSettings, "clusterSettings");
 
@@ -101,7 +101,8 @@ namespace EventStore.ClientAPI
                                                                           clusterSettings.MaxDiscoverAttempts,
                                                                           clusterSettings.ExternalGossipPort,
                                                                           clusterSettings.GossipSeeds,
-                                                                          clusterSettings.GossipTimeout);
+                                                                          clusterSettings.GossipTimeout,
+                                                                          clusterSettings.PreferRandomNode);
 
                 return new EventStoreNodeConnection(connectionSettings, clusterSettings, endPointDiscoverer, connectionName);
             }
@@ -124,7 +125,8 @@ namespace EventStore.ClientAPI
                     clusterSettings.MaxDiscoverAttempts,
                     clusterSettings.ExternalGossipPort,
                     clusterSettings.GossipSeeds,
-                    clusterSettings.GossipTimeout);
+                    clusterSettings.GossipTimeout,
+                    clusterSettings.PreferRandomNode);
 
                 return new EventStoreNodeConnection(connectionSettings, clusterSettings, endPointDiscoverer,
                     connectionName);
@@ -205,7 +207,8 @@ namespace EventStore.ClientAPI
                                                                       clusterSettings.MaxDiscoverAttempts,
                                                                       clusterSettings.ExternalGossipPort,
                                                                       clusterSettings.GossipSeeds,
-                                                                      clusterSettings.GossipTimeout);
+                                                                      clusterSettings.GossipTimeout,
+                                                                      clusterSettings.PreferRandomNode);
 
             return new EventStoreNodeConnection(connectionSettings, clusterSettings, endPointDiscoverer, connectionName);
         }
